@@ -12,7 +12,7 @@
       "fields-2.png",
       "fields-3.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "ai": {
     "width": 720,
@@ -26,7 +26,7 @@
       "ai-1.png",
       "ai-2.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "data": {
     "width": 720,
@@ -40,7 +40,7 @@
       "data-1.png",
       "data-2.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "mapping": {
     "width": 720,
@@ -54,7 +54,7 @@
       "mapping-1.png",
       "mapping-2.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "format": {
     "width": 720,
@@ -70,7 +70,7 @@
       "format-4.png",
       "format-3.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "json": {
     "width": 720,
@@ -85,7 +85,7 @@
       "json-2.png",
       "json-3.png"
     ],
-    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
   },
   "_ui_files": [
     "src/workbench.js",

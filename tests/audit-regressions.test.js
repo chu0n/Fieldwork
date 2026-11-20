@@ -1,3 +1,4 @@
+import {t} from '../src/locale.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
@@ -25,6 +26,7 @@ import {searchText} from '../src/usability.js';
 
 // Exercise private event handlers without adding production exports for tests.
 function functionFrom(file,name,env){
+ env.t=t;
  if(['bindAutoInput','bindFieldInput'].includes(name))env.assertNoDraft=functionFrom('main.js','assertNoDraft',env);
  const source=readFileSync(new URL('../src/'+file,import.meta.url),'utf8'),ast=parse(source,{ecmaVersion:'latest',sourceType:'module'});
  const node=ast.body.find(n=>n.type==='FunctionDeclaration'&&n.id.name===name);

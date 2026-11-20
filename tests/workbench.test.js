@@ -1,3 +1,4 @@
+import {setLanguage, getLanguage} from '../src/locale.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { filterRules } from '../src/rule-filter.js';
@@ -69,13 +70,13 @@ test('live diff editor keeps actual text separate from escaped paint and masks p
 test('ambiguous checkbox/radio Type stays combined unless selector explicitly identifies it',()=>{
  const base={type:'3',selector:'bank-choice'};
  assert.equal(rulePresentation(base).label,'Checkbox / Radio');
- assert.equal(rulePresentation({...base,selector:'//input[@type="radio"]'}).label,'Radio · Chọn một');
- assert.equal(rulePresentation({...base,selector:'[role=checkbox]'}).label,'Checkbox · Ô tích');
+ assert.equal(rulePresentation({...base,selector:'//input[@type="radio"]'}).label,'Radio · Single choice');
+ assert.equal(rulePresentation({...base,selector:'[role=checkbox]'}).label,'Checkbox · Toggle');
  assert.match(rulePresentation({type:'0'}).label,/Text/);
 });
 test('welcome has no auto-demo and the credit links chu0n to the requested account',()=>{
- assert.ok(welcome().includes('Thêm template của bạn'));assert.ok(!welcome().includes('data-action="demo"'));
- assert.ok(credit().includes('href="https://github.com/chu0n"'));assert.ok(credit().includes('built with'));
+ assert.ok(welcome().includes('Open a template'));assert.ok(!welcome().includes('data-action="demo"'));
+ assert.ok(credit().includes('href="https://github.com/chu0n"'));assert.ok(!credit().includes('Codex'));
 });
 test('old saved Fieldwork configurations remain readable after rename',async()=>{
  const project=await saveProject(doc,[],false);assert.equal(project.app,'chu0ns-fieldwork');
@@ -86,7 +87,7 @@ test('Raw toggle announces active state and a clear way back to editing',()=>{
  const button=html=>html.match(/<button[^>]*data-action="toggle-raw"[^>]*>[\s\S]*?<\/button>/)[0];
  assert.match(button(workspace(state,m)),/aria-pressed="false"/);
  assert.match(button(workspace({...state,rawMode:true},m)),/aria-pressed="true"/);
- assert.match(button(workspace({...state,rawMode:true},m)),/Đóng Raw/);
+ assert.match(button(workspace({...state,rawMode:true},m)),/Close Raw/);
  assert.ok(workspace({...state,rawMode:true},m).includes('id="raw-view"'));
 });
 test('obfuscated names never become missing-information headings or extra badges',()=>{
@@ -99,4 +100,16 @@ test('obfuscated names never become missing-information headings or extra badges
  assert.equal((html.match(/data-profile-field="profile-hotkey"/g)||[]).length,1);
  assert.ok(!html.includes('Cấu hình profile</button>'));
  assert.ok(!html.includes('class="context-profile"'));
+});
+
+
+test('English is the default and switching to Vietnamese changes UI copy',()=>{
+ assert.equal(getLanguage(),'en');
+ assert.match(welcome(),/Open a template/);
+ try {
+  setLanguage('vi');
+  assert.match(welcome(),/Thêm template của bạn/);
+  setLanguage('invalid');
+  assert.equal(getLanguage(),'vi');
+ } finally { setLanguage('en'); }
 });

@@ -1,3 +1,4 @@
+import { t } from './locale.js';
 import {uid,fingerprint,saveProject,loadProject,openTemplate,units} from './core.js';
 import {createWorkflow} from './fill-model.js';
 import {validateRecords} from './bulk-data.js';
@@ -78,7 +79,7 @@ export class RecoveryStorage{
 export class SessionAutosave{
  constructor(capture,notify=()=>{},storage=new RecoveryStorage()){this.capture=capture;this.notify=notify;this.storage=storage;this.enabled=true;this.ready=false;this.blocked=false;this.generation=0;this.savedGeneration=0;this.savedSignature=null;this.error='';}
  get saved(){return this.ready&&this.enabled&&!this.blocked&&!this.error&&!this.running&&this.generation===this.savedGeneration;}
- get status(){return this.error?{mode:'error',label:'Phiên chưa được lưu',detail:this.error}:!this.ready?{mode:'pending',label:'Đang khôi phục phiên…'}:!this.enabled?{mode:'off',label:'Tự lưu đang tắt'}:this.saved?{mode:'saved',label:'Phiên đã lưu',detail:this.savedAt?new Date(this.savedAt).toLocaleString('vi-VN'):''}:{mode:'pending',label:'Đang tự lưu phiên…'};}
+ get status(){return this.error?{mode:'error',label:t("Phiên chưa được lưu","Session unsaved"),detail:this.error}:!this.ready?{mode:'pending',label:t("Đang khôi phục phiên…","Restoring session…")}:!this.enabled?{mode:'off',label:t("Tự lưu đang tắt","Autosave off")}:this.saved?{mode:'saved',label:t("Phiên đã lưu","Session saved"),detail:this.savedAt?new Date(this.savedAt).toLocaleString('vi-VN'):''}:{mode:'pending',label:t("Đang tự lưu phiên…","Saving session…")};}
  async init(restore){try{const record=await this.storage.read();if(record!=null&&(typeof record!=='object'||Array.isArray(record)||!validId(record.revision)||typeof record.enabled!=='boolean'||!Number.isSafeInteger(record.savedAt)||record.savedAt<0||record.enabled&&record.snapshot!=null&&(typeof record.snapshot!=='object'||Array.isArray(record.snapshot))))throw new Error('Cấu trúc bản khôi phục không hợp lệ.');this.enabled=record?.enabled!==false;this.savedAt=record?.savedAt;return record?.snapshot&&this.enabled?await restore(record.snapshot):null;}catch(error){this.blocked=true;this.error='Không khôi phục được phiên đã lưu. '+error.message;return null;}finally{this.ready=true;this.notify(this.status);}}
  async prime(){
   if(!this.enabled||this.blocked)return;

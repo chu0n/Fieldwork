@@ -17,7 +17,7 @@ test('six real GIF guides have embedded posters and verified animation metadata'
  }
 });
 test('closed guides use posters but expose pause instead of a required play step',()=>{
- for(const key of kinds){const html=quickWalkthrough(key);assert.ok(html.includes('aria-pressed="false"'));assert.ok(!html.includes('Phát GIF'));assert.ok(html.includes('Tạm dừng'));assert.ok(html.includes('Tự chạy khi mở'));assert.ok(html.includes('data:image/png;base64,'));assert.ok(!html.includes('data:image/gif;base64,'));assert.ok(!html.includes('<details open'));assert.equal((html.match(/<li>/g)||[]).length,3);assert.ok(html.includes('dữ liệu giả'));}
+ for(const key of kinds){const html=quickWalkthrough(key);assert.ok(html.includes('aria-pressed="false"'));assert.ok(!html.includes('Phát GIF'));assert.ok(html.includes('Pause'));assert.ok(html.includes('Plays when opened'));assert.ok(html.includes('data:image/png;base64,'));assert.ok(!html.includes('data:image/gif;base64,'));assert.ok(!html.includes('<details open'));assert.equal((html.match(/<li>/g)||[]).length,3);assert.ok(html.includes('sample data'));}
 });
 
 test('automatic playback starts on opening and respects hidden panels and reduced motion',()=>{assert.equal(shouldAutoplayGuide({open:true}),true);assert.equal(shouldAutoplayGuide({open:false}),false);assert.equal(shouldAutoplayGuide({open:true,ancestorsOpen:false}),false);assert.equal(shouldAutoplayGuide({open:true,hidden:true}),false);assert.equal(shouldAutoplayGuide({open:true,reducedMotion:true}),false);});

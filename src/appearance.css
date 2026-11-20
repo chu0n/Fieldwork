@@ -337,3 +337,36 @@ dialog::backdrop { background: #1415227a; backdrop-filter: blur(3px); }
   .wf-stages button.active,
   .wf-source-modes .button.primary { border-color: Highlight; }
 }
+
+.language-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  border-radius: var(--r-small);
+  color: var(--text);
+}
+.language-picker:hover { background: var(--accent-bg); }
+.language-picker svg {
+  width: 16px;
+  position: absolute;
+  left: 8px;
+  pointer-events: none;
+}
+.language-picker select {
+  width: 102px;
+  min-height: 44px;
+  padding: 0 5px 0 29px;
+  border: 0;
+  border-radius: inherit;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.language-picker select option { color: var(--text); background: var(--surface); }
+@media (max-width: 560px) {
+  .language-picker select { width: 38px; color: transparent; appearance: none; padding: 0; }
+  .language-picker svg { left: 11px; }
+}
