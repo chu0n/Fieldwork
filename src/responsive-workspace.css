@@ -102,9 +102,21 @@
   .document-actions .button { min-height: 44px; white-space: normal; }
   .profile-bar .profile-inline-actions .button { min-height: 40px; }
   .profile-bar .profile-picker select { min-height: 42px; }
-  .profile-bar .profile-site { grid-area: 2 / 1; min-height: 34px; }
-  .profile-bar .profile-site > span { white-space: nowrap; }
-  .profile-bar .profile-hotkey { grid-area: 2 / 2; min-height: 34px; justify-content: flex-end; }
+  .profile-bar :is(.profile-site, .profile-hotkey, .profile-overview) { display: none; }
+  .profile-bar { grid-template-columns: minmax(0, 1fr) auto; }
+  .rules-toolbar .rule-groups {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .rules-toolbar .rule-groups button {
+    flex: 1 0 auto;
+    padding-inline: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .view-summary:not(:has(.active-filter-label, button)) { display: none; }
 
   .rules-toolbar { gap: 9px; }
   .rule-groups button { min-height: 44px; }
@@ -122,7 +134,7 @@
   .rule-original .original-caption { margin: 0; color: var(--muted); }
   .rule-original pre { min-height: 0; max-height: 6em; margin: 0; padding: 3px 0; }
   .rule-new .value-editor { min-height: 48px; }
-  .rule-new .value-editor :is(.live-diff-input, .value-mirror) { font-size: 16px; }
+  .rule-main .rule-new .value-editor :is(.live-diff-input, .value-mirror) { font-size: 16px; }
   .rule-new > .field-setup, .script-variable > .field-setup { min-height: 44px; margin-top: 0; }
 
   .fill-page { height: auto; min-height: 0; overflow: visible; }

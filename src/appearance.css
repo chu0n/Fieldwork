@@ -125,7 +125,18 @@
 .document-bar { padding: 13px 18px; border-bottom-color: transparent; }
 .document-bar h1 { font-size: 18px; }
 .document-bar p { font-size: 12px; }
-.profile-bar { padding-inline: 18px; border-bottom-color: transparent; }
+.document-actions:not(:has(.run-action.is-ready)) .setup-action {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+.document-actions .run-action.is-ready {
+  color: var(--accent-ink);
+  background: var(--accent-base);
+}
+.document-actions .run-action.is-ready:hover { filter: brightness(.94); }
+.rule-main .value-editor :is(.live-diff-input, .value-mirror) { font-size: 15px; }
+.wf-empty { border: 0; border-radius: var(--r-inset); background: var(--subtle); }
+.profile-bar { padding-inline: 18px; border-bottom-color: transparent; background: var(--surface); }
 .profile-picker select, .profile-info-edit { border-radius: var(--r-control); }
 .rules-toolbar { padding: 11px 18px 7px; border-bottom-color: transparent; }
 .rules-toolbar .search-box { height: 36px; border-radius: var(--r-control); }
@@ -364,7 +375,7 @@ dialog::backdrop { background: #1415227a; backdrop-filter: blur(3px); }
   pointer-events: none;
 }
 .language-picker select {
-  width: 102px;
+  min-width: 8rem;
   min-height: 44px;
   padding: 0 5px 0 29px;
   border: 0;
@@ -377,6 +388,6 @@ dialog::backdrop { background: #1415227a; backdrop-filter: blur(3px); }
 }
 .language-picker select option { color: var(--text); background: var(--surface); }
 @media (max-width: 560px) {
-  .language-picker select { width: 38px; color: transparent; appearance: none; padding: 0; }
+  .language-picker select { width: 38px; min-width: 0; color: transparent; appearance: none; padding: 0; }
   .language-picker svg { left: 11px; }
 }
