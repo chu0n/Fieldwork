@@ -40,3 +40,10 @@ test('undo restores the original value when a transaction edits a field twice',(
  assert.equal(travelWorkflow(flow,'redo'),true);
  assert.equal(workflowRecord(doc,fields,flow,0).values[0],'Final');
 });
+
+test('batch file extensions resolve ambiguous content and reject mislabeled JSON',()=>{
+ const table='[ID],Name\n0001,An';
+ assert.deepEqual(combineDataFiles([{name:'records.CSV',text:table}]),{headers:['[ID]','Name'],rows:[['0001','An']]});
+ assert.throws(()=>combineDataFiles([{name:'records.json',text:'ID,Name\n0001,An'}]),/records\.json: JSON/);
+ assert.deepEqual(combineDataFiles([{name:'records.txt',text:'{"ID":"0001"}'}]).rows,[['0001']]);
+});

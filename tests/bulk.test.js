@@ -118,3 +118,9 @@ test('labeled records preserve values across old Mac and Windows line endings',(
   assert.deepEqual(parseRecords(source,'labels'),expected);
  }
 });
+
+test('bulk JSON rejects unpaired surrogates before UTF-8 export and keeps valid Unicode',()=>{
+ assert.throws(()=>parseRecords('{"Note":"\\ud800"}'),/Unicode/);
+ assert.throws(()=>parseRecords('{"\\udc00":"value"}'),/Unicode/);
+ assert.deepEqual(parseRecords('{"Note":"\\ud83d\\ude00"}').rows,[['😀']]);
+});

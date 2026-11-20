@@ -29,11 +29,11 @@ export function openTemplate(source, name = 'template.txt', format = 'auto') {
   if (kind === 'auto') {
     const lightning=text.includes('### AUTOFILL')&&Papa.parse(text,{skipEmptyLines:false}).data.some(row=>['### AUTOFILL PROFILES ###','### AUTOFILL RULES ###'].includes(row[0]));
     kind = /\.json$/i.test(name) ? 'json' : /\.(m?js|cjs)$/i.test(name) ? 'javascript'
-      : /\.csv$/i.test(name) || lightning ? 'csv' : 'text';
+      : /\.(csv|tsv)$/i.test(name) || lightning ? 'csv' : 'text';
   }
   let rows = null, delimiter = ',', newline = text.includes('\r\n') ? '\r\n' : '\n';
   if (kind === 'csv') {
-    const result = Papa.parse(text, { skipEmptyLines: false });
+    const result = Papa.parse(text, { skipEmptyLines: false, delimiter: /\.tsv$/i.test(name) ? '\t' : '' });
     const fatal = result.errors.filter(e => e.code !== 'UndetectableDelimiter');
     if (fatal.length) throw new Error(`CSV không hợp lệ: ${fatal[0].message} (record ${Number(fatal[0].row ?? 0) + 1}).`);
     rows = result.data;
