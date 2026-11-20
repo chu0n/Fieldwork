@@ -161,3 +161,20 @@
   }
   dialog[open] .modal-footer .button { min-height: 44px; }
 }
+
+@media (max-width: 480px) {
+  .top-actions > [data-action="import"] { width: 44px; padding-inline: 0; }
+  .top-actions .open-files-label { display: none; }
+  .top-actions .language-picker select { width: 44px; }
+  .top-actions .language-picker svg { left: 14px; }
+  .top-actions { gap: 2px; }
+  .top-actions > .app-menu > div { right: -82px; max-width: calc(100vw - 24px); }
+  .rule-original { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .rule-original pre { padding: 8px 10px; }
+}
+
+@media (max-width: 360px) {
+  .topbar { gap: 4px; }
+  .topbar .brand strong { font-size: 14px; }
+  .topbar .brand > span { display: none; }
+}

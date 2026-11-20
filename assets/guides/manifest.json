@@ -12,7 +12,7 @@
       "fields-2.png",
       "fields-3.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "ai": {
     "width": 720,
@@ -26,7 +26,7 @@
       "ai-1.png",
       "ai-2.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "data": {
     "width": 720,
@@ -40,7 +40,7 @@
       "data-1.png",
       "data-2.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "mapping": {
     "width": 720,
@@ -54,7 +54,7 @@
       "mapping-1.png",
       "mapping-2.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "format": {
     "width": 720,
@@ -70,7 +70,7 @@
       "format-4.png",
       "format-3.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "json": {
     "width": 720,
@@ -85,7 +85,7 @@
       "json-2.png",
       "json-3.png"
     ],
-    "ui_hash": "a240c98d9d512f4477f9f24c77a39718d6a144cd26b0254291e604ec7753c526"
+    "ui_hash": "a1e250b4995894c83c0d9bcee94b5b32175f0164448c43b2c50d817a18bdaf94"
   },
   "_ui_files": [
     "src/workbench.js",
@@ -101,7 +101,7 @@
     "src/responsive-workspace.css"
   ],
   "_source_review": {
-    "date": "2026-11-20",
+    "date": "2026-11-21",
     "method": "source-review-only",
     "note": "Guide captures show the relevant controls using synthetic data."
   }

@@ -1,4 +1,4 @@
-import {parseExpressionAt} from 'acorn';
+import {parseExpressionAt,tokenizer} from 'acorn';
 function parseJSON(source){
  try{return JSON.parse(source);}catch(error){
   const line=error.message.match(/line (\d+) column (\d+)/i),position=error.message.match(/position (\d+)/i);
@@ -28,6 +28,32 @@ export function readJSON(source,{exactNumbers=false}={}){
  };
  visit(syntax);return value;
 }
+export function readJSONRecords(source,options){
+ const value=readJSON(source,options),records=Array.isArray(value)?value:[value];
+ if(!records.length||records.some(record=>!record||Array.isArray(record)||typeof record!=='object'))throw new Error('JSON cần một object hoặc một danh sách object, mỗi object là một bản ghi.');
+ return records;
+}
+
+export function formatJSONPreview(source){
+ const bom=source.startsWith('\uFEFF')?'\uFEFF':'',text=source.slice(bom.length);
+ parseJSON(text);
+ // Copy token text verbatim, including escapes and numeric spellings.
+ const tokens=tokenizer(text,{ecmaVersion:'latest'}),chunks=[bom];
+ let previous='',depth=0,size=bom.length;
+ for(let token=tokens.getToken();token.type.label!=='eof';token=tokens.getToken()){
+  const label=token.type.label,opened=previous==='{'||previous==='[',closing=label==='}'||label===']';
+  if(closing)depth--;
+  const newLine=(opened||closing||previous===',')&&!(opened&&closing);
+  const spacing=newLine?'\n'+'  '.repeat(depth):previous===':'?' ':'';
+  size+=spacing.length+token.end-token.start;
+  if(size>8_000_000)throw new Error('Formatted JSON exceeds the 8 MB preview limit.');
+  chunks.push(spacing,text.slice(token.start,token.end));
+  if(label==='{'||label==='[')depth++;
+  previous=label;
+ }
+ return chunks.join('');
+}
+
 // Explicit repair only: preserve raw object text, including duplicate keys for later validation.
 export function prepareJSONList(source){
  if(typeof source!=='string'||source.length>2_000_000)throw new Error('Dữ liệu tối đa 2 MB.');
