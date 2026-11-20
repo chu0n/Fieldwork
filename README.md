@@ -26,3 +26,9 @@ On Windows, use an NTFS checkout for dependency installation and builds. If your
 Open `release/Fieldwork.html` for offline use. To open a local build from an iPhone on the same Wi-Fi, follow the [iPhone guide](docs/IPHONE.md). The [Pages workflow](.github/workflows/pages.yml) builds from `main` and publishes only the standalone app.
 
 See [maintenance notes](docs/MAINTENANCE.md) for validation, storage limits, and the checks to run when changing imports or exports.
+
+## Maintenance
+
+Dependabot opens security fixes as advisories are published and groups routine updates monthly. Review its pull requests and merge once the build and dependency review pass. GitHub Pages publishes from main after the build succeeds.
+
+If a deployment breaks, revert the offending change through a pull request. For a security alert without a fix PR, check the advisory and decide whether to replace or remove the affected package.
