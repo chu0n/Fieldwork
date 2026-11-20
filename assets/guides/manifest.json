@@ -1,0 +1,108 @@
+{
+  "fields": {
+    "width": 720,
+    "height": 420,
+    "frames": 105,
+    "duration_ms": 12000,
+    "bytes": 286477,
+    "source": "real-ui-capture",
+    "captures": [
+      "fields-0.png",
+      "fields-1.png",
+      "fields-2.png",
+      "fields-3.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "ai": {
+    "width": 720,
+    "height": 420,
+    "frames": 85,
+    "duration_ms": 9000,
+    "bytes": 339344,
+    "source": "real-ui-capture",
+    "captures": [
+      "ai-0.png",
+      "ai-1.png",
+      "ai-2.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "data": {
+    "width": 720,
+    "height": 420,
+    "frames": 97,
+    "duration_ms": 9000,
+    "bytes": 252462,
+    "source": "real-ui-capture",
+    "captures": [
+      "data-0.png",
+      "data-1.png",
+      "data-2.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "mapping": {
+    "width": 720,
+    "height": 420,
+    "frames": 85,
+    "duration_ms": 9000,
+    "bytes": 257466,
+    "source": "real-ui-capture",
+    "captures": [
+      "mapping-0.png",
+      "mapping-1.png",
+      "mapping-2.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "format": {
+    "width": 720,
+    "height": 420,
+    "frames": 137,
+    "duration_ms": 15000,
+    "bytes": 615233,
+    "source": "real-ui-capture",
+    "captures": [
+      "format-0.png",
+      "format-1.png",
+      "format-2.png",
+      "format-4.png",
+      "format-3.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "json": {
+    "width": 720,
+    "height": 420,
+    "frames": 105,
+    "duration_ms": 12000,
+    "bytes": 460176,
+    "source": "real-ui-capture",
+    "captures": [
+      "json-0.png",
+      "json-1.png",
+      "json-2.png",
+      "json-3.png"
+    ],
+    "ui_hash": "6a5038049829cc02bcf8b6391caaa98d68089591c44f4690a8ec62b147cf0600"
+  },
+  "_ui_files": [
+    "src/workbench.js",
+    "src/fill-workspace.js",
+    "src/main.js",
+    "src/style.css",
+    "src/workspace.css",
+    "src/layout.css",
+    "src/bulk.css",
+    "src/selection-fields.js",
+    "src/quick-walkthrough.js",
+    "src/appearance.css",
+    "src/responsive-workspace.css"
+  ],
+  "_source_review": {
+    "date": "2026-11-20",
+    "method": "source-review-only",
+    "note": "Guide captures show the relevant controls using synthetic data."
+  }
+}

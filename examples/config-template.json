@@ -1,0 +1,8 @@
+{
+  "recipient": {
+    "name": "Nguyễn An",
+    "email": "an@example.com"
+  },
+  "attachment": "portrait-demo.jpg",
+  "reference": "DEMO-001"
+}

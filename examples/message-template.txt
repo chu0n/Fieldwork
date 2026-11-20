@@ -1,0 +1,9 @@
+Xin chào Nguyễn An,
+
+Hồ sơ DEMO-001 đã được tiếp nhận.
+Chúng tôi sẽ gửi xác nhận tới an@example.com.
+
+Email nhận bản sao: an@example.com
+Tệp đính kèm: portrait-demo.jpg
+
+Đây là dữ liệu giả phục vụ thử nghiệm.

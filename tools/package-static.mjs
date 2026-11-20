@@ -1,0 +1,38 @@
+import { readFile, writeFile, mkdir, copyFile, cp } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+let html = await readFile(resolve(root,'dist/index.html'),'utf8');
+const script = html.match(/<script\b[^>]*src="([^"]+)"[^>]*><\/script>/);
+const css = html.match(/<link\b[^>]*href="([^"]+\.css)"[^>]*>/);
+if (!script || !css) throw new Error('Build layout changed; cannot package standalone HTML.');
+const js = await readFile(resolve(root,'dist',script[1]),'utf8');
+const styles = await readFile(resolve(root,'dist',css[1]),'utf8');
+const scriptBody=js.replace(/<\/script/gi,'<\\/script');
+html = html.replace(script[0],()=>`<script type="module">${scriptBody}</script>`);
+html = html.replace(css[0],()=>`<style>${styles}</style>`);
+const scriptHash=createHash('sha256').update(scriptBody).digest('base64');
+const policy=`default-src 'none'; script-src 'sha256-${scriptHash}'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'`;
+html=html.replace(/<head>/i,()=>`<head>\n<meta http-equiv="Content-Security-Policy" content="${policy}">`);
+await mkdir(resolve(root,'release'),{recursive:true});
+await writeFile(resolve(root,"release/Chu0n's Fieldwork.html"),html,'utf8');
+// Keep the old entry point usable for existing file:// bookmarks and browser-local data.
+await writeFile(resolve(root,'release/Fieldwork.html'),html,'utf8');
+await writeFile(resolve(root,'release/index.html'),html,'utf8');
+await copyFile(resolve(root,'tools/serve-iphone.mjs'),resolve(root,'release/serve-iphone.mjs'));
+await copyFile(resolve(root,'tools/OPEN-ON-IPHONE.cmd'),resolve(root,'release/OPEN-ON-IPHONE.cmd'));
+await copyFile(resolve(root,'docs/IPHONE.md'),resolve(root,'release/IPHONE.md'));
+await copyFile(resolve(root,'docs/QUICKSTART.md'),resolve(root,'release/HUONG-DAN.md'));
+await copyFile(resolve(root,'docs/BULK-FILL.md'),resolve(root,'release/HANG-LOAT.md'));
+await copyFile(resolve(root,'docs/LLM.md'),resolve(root,'release/LLM.md'));
+await copyFile(resolve(root,'docs/SESSION-RESTORE.md'),resolve(root,'release/SESSION-RESTORE.md'));
+await copyFile(resolve(root,'docs/MAINTENANCE.md'),resolve(root,'release/MAINTENANCE.md'));
+await cp(resolve(root,'examples'),resolve(root,'release/examples'),{recursive:true});
+await cp(resolve(root,'assets/guides'),resolve(root,'release/guides'),{recursive:true});
+const notices = await Promise.all(['papaparse','acorn','lucide','diff','@noble/hashes','fflate'].map(async name => `## ${name}\n\n${await readFile(resolve(root,'node_modules',name,'LICENSE'),'utf8')}`));
+await writeFile(resolve(root,'release/THIRD-PARTY-NOTICES.md'),`# Third-party licenses\n\n${notices.join('\n\n')}`,'utf8');
+console.log('Standalone app: release/Fieldwork.html');
+await import('./build-qa.mjs');
+await import('./build-bulk-example.mjs');

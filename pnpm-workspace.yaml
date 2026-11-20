@@ -1,0 +1,14 @@
+# No install-time code execution. Explicit pnpm run commands remain available.
+ignoreScripts: true
+ignorePnpmfile: true
+strictDepBuilds: true
+allowBuilds:
+  esbuild: false
+  fsevents: false
+minimumReleaseAge: 1440
+blockExoticSubdeps: true
+verifyStoreIntegrity: true
+verifyDepsBeforeRun: error
+pmOnFail: error
+runtimeOnFail: error
+saveExact: true

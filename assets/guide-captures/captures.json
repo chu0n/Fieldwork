@@ -1,0 +1,366 @@
+{
+  "fields": [
+    {
+      "file": "fields-0.png",
+      "title": "Bấm Chọn làm ô cần điền",
+      "crop": [
+        672,
+        479,
+        1050,
+        565
+      ],
+      "height": 86,
+      "target": [
+        73.46875,
+        68.390625
+      ],
+      "width": 378
+    },
+    {
+      "file": "fields-1.png",
+      "title": "Đặt Tên trường; mã cột được tạo tự động",
+      "crop": [
+        165,
+        497,
+        914,
+        608
+      ],
+      "height": 111,
+      "target": [
+        374.5,
+        54.4375
+      ],
+      "width": 749
+    },
+    {
+      "file": "fields-2.png",
+      "title": "Bấm Lưu trường",
+      "crop": [
+        150,
+        618,
+        929,
+        681
+      ],
+      "height": 63,
+      "target": [
+        712.1875,
+        32.03125
+      ],
+      "width": 779
+    },
+    {
+      "file": "fields-3.png",
+      "title": "Ô đã gắn với trường Họ và tên",
+      "crop": [
+        672,
+        479,
+        1050,
+        571
+      ],
+      "height": 92,
+      "target": [
+        188.53125,
+        45.5
+      ],
+      "width": 378
+    }
+  ],
+  "data": [
+    {
+      "file": "data-0.png",
+      "title": "Chọn một hoặc nhiều file CSV, TSV, JSON",
+      "crop": [
+        31,
+        395,
+        541,
+        450
+      ],
+      "height": 55,
+      "target": [
+        380.578125,
+        27.890625
+      ],
+      "width": 510
+    },
+    {
+      "file": "data-1.png",
+      "title": "Bấm Nhập danh sách này ở thanh dưới",
+      "crop": [
+        1091,
+        638,
+        1253,
+        691
+      ],
+      "height": 53,
+      "target": [
+        81.1484375,
+        26.5
+      ],
+      "width": 162
+    },
+    {
+      "file": "data-2.png",
+      "title": "Bấm Tiếp: kiểm tra 2 bản ghi",
+      "crop": [
+        1071,
+        638,
+        1253,
+        691
+      ],
+      "height": 53,
+      "target": [
+        91.265625,
+        26.5
+      ],
+      "width": 182
+    }
+  ],
+  "mapping": [
+    {
+      "file": "mapping-0.png",
+      "title": "Email chưa chọn cột nguồn",
+      "crop": [
+        439,
+        337,
+        834,
+        528
+      ],
+      "height": 191,
+      "target": [
+        197.4921875,
+        113.9375
+      ],
+      "width": 395
+    },
+    {
+      "file": "mapping-1.png",
+      "title": "Chọn hsk:email và đối chiếu ví dụ người đầu",
+      "crop": [
+        439,
+        337,
+        834,
+        528
+      ],
+      "height": 191,
+      "target": [
+        197.4921875,
+        113.9375
+      ],
+      "width": 395
+    },
+    {
+      "file": "mapping-2.png",
+      "title": "Bấm Tiếp: kiểm tra khi đã chọn đúng cột",
+      "crop": [
+        1071,
+        638,
+        1253,
+        691
+      ],
+      "height": 53,
+      "target": [
+        91.265625,
+        26.5
+      ],
+      "width": 182
+    }
+  ],
+  "format": [
+    {
+      "file": "format-0.png",
+      "title": "Mở Định dạng ngay dưới ô đang sửa",
+      "crop": [
+        249,
+        480,
+        687,
+        591
+      ],
+      "height": 111,
+      "target": [
+        218.796875,
+        91.625
+      ],
+      "width": 438
+    },
+    {
+      "file": "format-1.png",
+      "title": "Chọn Bỏ dấu, IN HOA; Cả cột; Xem trước",
+      "crop": [
+        249,
+        506,
+        687,
+        638
+      ],
+      "height": 132,
+      "target": [
+        394.4765625,
+        55.875
+      ],
+      "width": 438
+    },
+    {
+      "file": "format-2.png",
+      "title": "Đối chiếu giá trị trước và sau",
+      "crop": [
+        260,
+        418,
+        676,
+        553
+      ],
+      "height": 135,
+      "target": [
+        208,
+        72
+      ],
+      "width": 416
+    },
+    {
+      "file": "format-4.png",
+      "title": "Bấm Áp dụng cho cả cột",
+      "crop": [
+        260,
+        499,
+        438,
+        553
+      ],
+      "height": 54,
+      "target": [
+        65.4921875,
+        26.734375
+      ],
+      "width": 178
+    },
+    {
+      "file": "format-3.png",
+      "title": "Giá trị đã đổi ngay trong ô Họ và tên",
+      "crop": [
+        249,
+        471,
+        687,
+        582
+      ],
+      "height": 111,
+      "target": [
+        218.796875,
+        54.4765625
+      ],
+      "width": 438
+    }
+  ],
+  "ai": [
+    {
+      "file": "ai-0.png",
+      "title": "Chọn json rồi bấm Sao chép prompt",
+      "crop": [
+        31,
+        474,
+        236,
+        572
+      ],
+      "height": 98,
+      "target": [
+        71.765625,
+        71.484375
+      ],
+      "width": 205
+    },
+    {
+      "file": "ai-1.png",
+      "title": "Dán kết quả AI vào Kết quả từ AI",
+      "crop": [
+        31,
+        319,
+        671,
+        555
+      ],
+      "height": 236,
+      "target": [
+        605.5,
+        132.96875
+      ],
+      "width": 640
+    },
+    {
+      "file": "ai-2.png",
+      "title": "Bấm Nhập danh sách này ở thanh dưới",
+      "crop": [
+        1091,
+        638,
+        1253,
+        691
+      ],
+      "height": 53,
+      "target": [
+        81.1484375,
+        26.5
+      ],
+      "width": 162
+    }
+  ],
+  "json": [
+    {
+      "file": "json-0.png",
+      "title": "Ứng dụng nhận ra 2 người trong các khối JSON",
+      "crop": [
+        46,
+        388,
+        686,
+        458
+      ],
+      "height": 70,
+      "target": [
+        132.46875,
+        17.0625
+      ],
+      "width": 640
+    },
+    {
+      "file": "json-1.png",
+      "title": "Xem trước JSON đã gộp",
+      "crop": [
+        46,
+        374,
+        686,
+        571
+      ],
+      "height": 197,
+      "target": [
+        590.5,
+        98.140625
+      ],
+      "width": 640
+    },
+    {
+      "file": "json-2.png",
+      "title": "Bấm Dùng bản JSON này",
+      "crop": [
+        46,
+        455,
+        207,
+        509
+      ],
+      "height": 54,
+      "target": [
+        80.1328125,
+        27.03125
+      ],
+      "width": 161
+    },
+    {
+      "file": "json-3.png",
+      "title": "Bấm Nhập danh sách này để áp dụng",
+      "crop": [
+        1091,
+        638,
+        1253,
+        691
+      ],
+      "height": 53,
+      "target": [
+        81.1484375,
+        26.5
+      ],
+      "width": 162
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "fieldwork",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build --base=./ && node tools/package-static.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/core.test.js tests/lightning.test.js tests/workbench.test.js tests/profiles.test.js tests/mobile.test.js tests/bulk.test.js tests/llm.test.js tests/history.test.js tests/direct-edit.test.js tests/usability.test.js tests/fill-model.test.js tests/fill-ui.test.js tests/guides.test.js tests/selection-fields.test.js tests/audit-regressions.test.js tests/security.test.js tests/session-recovery.test.js"
+  },
+  "dependencies": {
+    "@noble/hashes": "2.4.0",
+    "acorn": "8.15.0",
+    "diff": "8.0.4",
+    "fflate": "0.8.3",
+    "lucide": "0.468.0",
+    "papaparse": "5.5.3"
+  },
+  "devDependencies": {
+    "vite": "6.4.4"
+  },
+  "packageManager": "pnpm@12.15.0",
+  "engines": {
+    "node": ">=24.22.1 <25",
+    "pnpm": "12.15.0"
+  }
+}

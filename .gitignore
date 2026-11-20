@@ -1,0 +1,18 @@
+# Real candidate records, credentials, photos and generated exports stay local.
+data/**
+configs/
+outputs/
+work/
+.env
+.env.*
+!.env.example
+*.log
+*.sqlite*
+*.db
+__pycache__/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+release/
+_site/

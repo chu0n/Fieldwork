@@ -1,0 +1,49 @@
+{
+  "app": "chu0ns-fieldwork",
+  "version": 1,
+  "name": "Multi-segment-QA.txt",
+  "format": "text",
+  "source": "Ten AN, anh AN.jpg, ma 001",
+  "fingerprint": "371c5467dda436c0aa96f6c86e1165aaa49510f9ff83fc63e270b45c82085f2a",
+  "fields": [
+    {
+      "id": "name",
+      "key": "field:name",
+      "label": "Ten",
+      "value": "AN",
+      "type": "text",
+      "transform": "none",
+      "required": true,
+      "bindings": [
+        {
+          "unitId": "text",
+          "start": 4,
+          "end": 6,
+          "expected": "AN",
+          "mode": "text"
+        }
+      ]
+    },
+    {
+      "id": "photo",
+      "key": "field:photo",
+      "label": "Anh",
+      "value": "AN",
+      "type": "text",
+      "transform": "none",
+      "required": true,
+      "bindings": [
+        {
+          "unitId": "text",
+          "start": 12,
+          "end": 14,
+          "expected": "AN",
+          "mode": "text"
+        }
+      ]
+    }
+  ],
+  "options": {
+    "pinnedRuleIds": []
+  }
+}

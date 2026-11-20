@@ -1,0 +1,57 @@
+### AUTOFILL PROFILES ###,,,,,,
+Profile ID,Name,Site,Hotkey,,,
+c1,HSK · Mẫu minh họa,https://docs.google.com/forms/,Ctrl + Q,,,
+### AUTOFILL RULES ###,,,,,,
+Rule ID,Type,Name,Value,Site,Mode,Profile
+r1,0,HỌ VÀ TÊN | 姓名,NGUYEN AN,,1,c1
+r2,0,EMAIL | 邮箱,an@example.com,,1,c1
+r3,0,SỐ GIẤY TỜ,000000000001,,1,c1
+r4,0,NGÀY SINH,2000-01-01,,1,c1
+r5,0,ĐIỆN THOẠI,0900000000,,1,c1
+r6,0,SỐ TÀI KHOẢN,0000000002,,1,c1
+r7,0,CHỦ TÀI KHOẢN,NGUYEN AN,,1,c1
+r8,0,ĐỊA CHỈ LIÊN HỆ,Địa chỉ minh họa,,1,c1
+r9,0,EMAIL XÁC NHẬN,an@example.com,,1,c1
+r10,0,MÃ HỒ SƠ,DEMO-001,,1,c1
+r11,0,GHI CHÚ,Dữ liệu giả để thử chỉnh sửa,,1,c1
+r12,2,GIỚI TÍNH | 性别,Nữ | 女,,1,c1
+r13,2,LOẠI GIẤY TỜ | 证件类型,CCCD | 身份证,,1,c1
+r14,2,THỜI GIAN HỌC TIẾNG TRUNG,2 năm,,1,c1
+r15,3,TÊN NGÂN HÀNG | 银行名称,MB BANK,,1,c1
+r16,3,QUỐC TỊCH,Việt Nam,,1,c1
+r17,3,TIẾNG MẸ ĐẺ,Tiếng Việt,,1,c1
+r18,3,PHƯƠNG THỨC THANH TOÁN,Chuyển khoản,,1,c1
+r19,3,CẤP THI,HSK4,,1,c1
+r20,3,Lưu lại an@example.com để nhận bản sao,1,,1,c1
+r21,3,TÔI CAM KẾT,1,,1,c1
+r22,3,ĐỒNG Ý ĐIỀU KHOẢN,1,,1,c1
+r23,4,,"(async function () {
+  // Chỉ minh họa cấu hình. Fieldwork không chạy script này.
+  const TARGET_FILE_NAME = ""portrait-demo.jpg"";
+  const EMAIL = ""an@example.com"";
+
+  const uploadButton = document.querySelector('[data-demo=""upload""]');
+  if (uploadButton) uploadButton.click();
+
+  console.log(""Tệp cần chọn:"", TARGET_FILE_NAME);
+  console.log(""Email liên hệ:"", EMAIL);
+})();",,1,c1
+r24,4,,"const nextButton = document.querySelector(""[data-demo=next]"");
+// Nút Tiếp trong ví dụ
+if (nextButton) nextButton.click();",,1,c1
+r25,4,,"const submitButton = document.querySelector(""[data-demo=submit]"");
+// Nút Gửi trong ví dụ
+if (submitButton) submitButton.click();",,1,c1
+r26,4,,"const FORM_URL = ""https://example.com/demo-form"";
+// URL minh họa, chưa điều hướng.
+console.log(FORM_URL);",,1,c1
+r27,4,,"const NOTICE = ""Kiểm tra thông tin trước khi gửi"";
+console.log(NOTICE);",,1,c1
+r28,4,,"setTimeout(() => console.log(""Demo timer""), 1000);",,1,c1
+r29,4,,"const FILE_PREFIX = ""portrait"";
+console.log(FILE_PREFIX);",,1,c1
+r30,6,"//div[@role=""checkbox"" and @aria-checked=""false""]",,,1,c1
+r31,12,3000,,,1,c1
+r32,12,1000,,,1,c1
+### AUTOFILL SETTINGS ###,,,,,,
+activecat,c1,,,,,
