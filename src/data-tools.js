@@ -18,7 +18,8 @@ export function combineDataFiles(files,{fields=[],ai=false,format='json'}={}){
   let data;try{data=ai?parseLLMOutput(file.text,format,fields):parseRecords(file.text,/\.tsv$/i.test(file.name)?'tsv':'auto');}catch(error){throw new Error(file.name+': '+error.message);}
   headers??=data.headers;
   if(data.headers.length!==headers.length||headers.some(h=>!data.headers.includes(h)))throw new Error(file.name+': bộ cột khác các file trước. Chọn các file dùng cùng bộ trường.');
-  rows.push(...data.rows.map(row=>headers.map(h=>row[data.headers.indexOf(h)])));
+  const sourceColumns=headers.map(h=>data.headers.indexOf(h));
+  rows.push(...data.rows.map(row=>sourceColumns.map(i=>row[i])));
   if(rows.length>500)throw new Error('Tổng cộng tối đa 500 người mỗi lượt.');
  }
  const data={headers,rows};

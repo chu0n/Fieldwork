@@ -102,3 +102,19 @@ test('oversized repeated replacements are rejected before building huge output s
  assert.throws(()=>checkWorkflow(doc,fields,flow),/8 MB/);
  assert.throws(()=>workflowRecord(doc,fields,flow,0),/8 MB/);
 });
+
+test('bulk import enforces the row and column limits for every format',()=>{
+ const cells=Array.from({length:151},(_,i)=>'field'+i);
+ assert.throws(()=>parseRecords(JSON.stringify(cells.map(key=>({[key]:'value'})))),/150/);
+ assert.throws(()=>parseRecords(cells.join(',')+'\n'+cells.join(',')),/150/);
+ assert.throws(()=>parseRecords('Name\n'+'value\n'.repeat(501)),/500/);
+ assert.throws(()=>parseRecords('Key: value\n\n'.repeat(501),'labels'),/500/);
+ assert.equal(parseRecords('Name\n'+'value\n'.repeat(500)).rows.length,500);
+});
+test('labeled records preserve values across old Mac and Windows line endings',()=>{
+ const expected={headers:['Name','ID'],rows:[['An','001'],['Bình','002']]};
+ for(const eol of ['\r','\r\n','\n']){
+  const source=['Name: An','ID: 001','','Name: Bình','ID: 002',''].join(eol);
+  assert.deepEqual(parseRecords(source,'labels'),expected);
+ }
+});
