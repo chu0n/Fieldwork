@@ -142,3 +142,12 @@ test('Lightning rules must refer to existing profiles',()=>{
   const doc=openTemplate(Papa.unparse([['### AUTOFILL PROFILES ###','','','','','',''],['Profile ID','Name','Site','Hotkey','','',''],['c1','Demo','','','','',''],['### AUTOFILL RULES ###','','','','','',''],['Rule ID','Type','Name','Value','Site','Mode','Profile'],['r1','0','field','value','','1','missing']]),'rules.csv');
   assert.ok(renderTemplate(doc,[]).problems.some(p=>p.includes('profile không tồn tại')));
 });
+
+test('TSV templates expose cells and preserve tabs, quoted data and CRLF when editing',()=>{
+ const source='\uFEFFID\tNote\r\n0001\t"first\tline"\r\n',doc=openTemplate(source,'template.TSV');
+ assert.equal(doc.delimiter,'\t');
+ assert.equal(renderTemplate(doc,[]).output,source);
+ const result=renderTemplate(doc,[field([makeBinding(doc,'1:0',0,4)],'0002')]);
+ assert.deepEqual(result.problems,[]);
+ assert.equal(result.output,source.replace('0001','0002'));
+});

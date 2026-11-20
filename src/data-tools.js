@@ -15,7 +15,8 @@ export function combineDataFiles(files,{fields=[],ai=false,format='json'}={}){
  if(files.reduce((n,f)=>n+new TextEncoder().encode(f.text).length,0)>2_000_000)throw new Error('Tổng file dữ liệu tối đa 2 MB.');
  let headers,rows=[];
  for(const file of files){
-  let data;try{data=ai?parseLLMOutput(file.text,format,fields):parseRecords(file.text,/\.tsv$/i.test(file.name)?'tsv':'auto');}catch(error){throw new Error(file.name+': '+error.message);}
+  const fileFormat=/\.(json|csv|tsv)$/i.exec(file.name)?.[1].toLowerCase()||'auto';
+  let data;try{data=ai?parseLLMOutput(file.text,format,fields):parseRecords(file.text,fileFormat);}catch(error){throw new Error(file.name+': '+error.message);}
   headers??=data.headers;
   if(data.headers.length!==headers.length||headers.some(h=>!data.headers.includes(h)))throw new Error(file.name+': bộ cột khác các file trước. Chọn các file dùng cùng bộ trường.');
   const sourceColumns=headers.map(h=>data.headers.indexOf(h));

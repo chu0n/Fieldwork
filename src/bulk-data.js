@@ -51,6 +51,9 @@ export function validateRecords({headers,rows}){
  if(!Array.isArray(headers)||!Array.isArray(rows)||!headers.length||!rows.length)throw new Error('Cần dòng tiêu đề và ít nhất một người.');
  assertDimensions(rows.length,headers.length);
  if(headers.some(h=>typeof h!=='string')||rows.some(row=>!Array.isArray(row)||row.some(v=>typeof v!=='string')))throw new Error('Tên cột và giá trị dữ liệu phải là chuỗi.');
+ // In Unicode mode valid surrogate pairs are read as one code point.
+ const invalidUnicode=/[\uD800-\uDFFF]/u;
+ if(headers.some(h=>invalidUnicode.test(h))||rows.some(row=>row.some(v=>invalidUnicode.test(v))))throw new Error('Dữ liệu chứa ký tự Unicode không hợp lệ. Kiểm tra lại file nguồn.');
  if(headers.some(h=>!h)||new Set(headers).size!==headers.length)throw new Error('Tên cột trống hoặc trùng. Hãy đổi tiêu đề cột.');
  if(rows.some(r=>r.length!==headers.length))throw new Error('Số ô trong một số dòng không khớp dòng tiêu đề.');
  if(headers.reduce((n,h)=>n+h.length,0)+rows.reduce((n,row)=>n+row.reduce((sum,v)=>sum+v.length,0),0)>2_000_000)throw new Error('Dữ liệu tối đa 2 MB.');
