@@ -82,6 +82,7 @@ function updateLivePreview(){
  const errors=document.querySelector('#validation-errors');if(errors){errors.hidden=!m.result.problems.length;errors.innerHTML=`<summary>${t("Xem lỗi (","Review issues (")}${m.result.problems.length})</summary>`+m.result.problems.map(p=>`<p>${esc(p)}</p>`).join('');}
  const count=document.querySelector('#count-changed');if(count)count.textContent=rules.filter(r=>changesForRule(state,m,r).length).length;
  const status=document.querySelector('.document-state');if(status)status.textContent=state.dirty?t("Có thay đổi chưa tải","Undownloaded changes"):state.exported?t("Đã tải file","File downloaded"):t("Nguồn được giữ nguyên","Source file unchanged");
+ document.querySelector('.run-action')?.classList.toggle('is-ready',state.dirty);
  const undo=document.querySelector('[data-action="undo"]');if(undo)undo.disabled=!state.history.length;const redo=document.querySelector('[data-action="redo"]');if(redo)redo.disabled=!state.future?.length;
  captureActive();autosave.schedule();refreshIcons();
 }
@@ -124,13 +125,18 @@ async function importFiles(files){
  if(results.filter(r=>r.status==='fulfilled').length+sessions.items.length>sessions.limit)return toast(`Không đủ tab trống sau khi đọc file. Tối đa ${sessions.limit} file; hãy đóng bớt tab rồi mở lại.`);
  const errors=[];let count=0;
  results.forEach((r,index)=>{try{if(r.status==='rejected')throw r.reason;openDocument(r.value);count++;}catch(error){errors.push(`${files[index].name}: ${error.message}`);}});
- render();if(errors.length){modal('Kết quả mở file',`Đã mở ${count} file; ${errors.length} file cần kiểm tra.`,errors.map(e=>`<p>${esc(e)}</p>`).join(''),'<button id="dismiss-import-report" class="button primary">Đã hiểu</button>');document.querySelector('#dismiss-import-report').onclick=()=>document.querySelector('#modal').close();}else toast(`Đã mở ${count} file. Chuyển tab để chỉnh từng file; nội dung không bị trộn.`);
+ render();if(errors.length){modal('Kết quả mở file',`Đã mở ${count} file; ${errors.length} file cần kiểm tra.`,errors.map(e=>`<p>${esc(e)}</p>`).join(''),'<button id="dismiss-import-report" class="button primary">Đã hiểu</button>');document.querySelector('#dismiss-import-report').onclick=()=>document.querySelector('#modal').close();}else if(count>1)toast(t(`Đã mở ${count} file.`,`Opened ${count} files.`));
 }
 function bindEvents(){
- document.querySelector('#language-picker').onchange=event=>{
-   setLanguage(event.target.value);
+ const languagePicker=document.querySelector('#language-picker');
+ let pointerSelection=false;
+ languagePicker.onpointerdown=()=>{pointerSelection=true;};
+ languagePicker.onkeydown=languagePicker.onblur=()=>{pointerSelection=false;};
+ languagePicker.onchange=()=>{
+   const restoreFocus=!pointerSelection&&languagePicker.matches(':focus-visible');
+   setLanguage(languagePicker.value);
    render();
-   document.querySelector('#language-picker').focus();
+   if(restoreFocus)document.querySelector('#language-picker').focus({preventScroll:true});
  };
  const tabMenu=document.querySelector('.tab-create');if(tabMenu)tabMenu.addEventListener('toggle',()=>{if(!tabMenu.open)return;const r=tabMenu.querySelector('summary').getBoundingClientRect(),menu=tabMenu.querySelector(':scope > div');menu.style.left=Math.max(12,Math.min(r.left,innerWidth-312))+'px';menu.style.top=(r.bottom+5)+'px';menu.style.maxHeight=Math.max(120,innerHeight-r.bottom-20)+'px';});
  document.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();action(el.dataset.action,el);}));
