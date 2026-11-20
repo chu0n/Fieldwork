@@ -28,3 +28,15 @@ test('multi-file import rejects mismatched schema, oversized batches and malform
 test('AI multi-file mode strictly validates every file and rejects duplicate JSON keys',()=>{const {fields}=make(),record=Object.fromEntries(fields.map(f=>[f.key,'0001']));const input=JSON.stringify([record]);assert.equal(combineDataFiles([{name:'a.json',text:input},{name:'b.json',text:input}],{ai:true,fields}).rows.length,2);assert.throws(()=>combineDataFiles([{name:'a.json',text:input},{name:'bad.json',text:'[{"field:full_name":"A","field:full_name":"B","field:email":"a@example.test","field:id":"01"}]'}],{ai:true,fields}),/key JSON bị lặp/);});
 test('format tools preserve digits, punctuation and meaning unless explicitly changed',()=>{assert.equal(formatText('Đặng Minh 001','ascii-upper'),'DANG MINH 001');assert.equal(formatText('Đặng Minh 001','upper'),'ĐẶNG MINH 001');assert.equal(formatText('  A  B \n C  ','spaces'),'A B C');assert.equal(formatText('  A  B  ','trim'),'A  B');assert.equal(formatText('ĐẶNG 001','lower'),'đặng 001');assert.throws(()=>formatText('x','unknown'));});
 test('column text edits are atomic, undoable together and leave source immutable',()=>{const {doc,fields,flow}=make(),original=structuredClone(flow.data),field=fields[0];changeWorkflowValues(doc,fields,flow,[{index:0,fieldId:field.id,value:'NGUYỄN AN'},{index:1,fieldId:field.id,value:'TRẦN BÌNH'}]);assert.equal(flow.history.length,1);checkWorkflow(doc,fields,flow);assert.equal(workflowRecord(doc,fields,flow,1).fields[0].value,'TRẦN BÌNH');travelWorkflow(flow,'undo');assert.equal(workflowRecord(doc,fields,flow,0).fields[0].value,'AN');assert.equal(workflowRecord(doc,fields,flow,1).fields[0].value,'BINH');travelWorkflow(flow,'redo');assert.equal(workflowRecord(doc,fields,flow,0).fields[0].value,'NGUYỄN AN');assert.deepEqual(flow.data,original);const before=structuredClone(flow.overrides);assert.throws(()=>changeWorkflowValues(doc,fields,flow,[{index:0,fieldId:field.id,value:'a'.repeat(2_000_001)}]),/2 MB/);assert.deepEqual(flow.overrides,before);});
+
+test('undo restores the original value when a transaction edits a field twice',()=>{
+ const doc=openTemplate('Name {{field:name}}','demo.txt'),fields=discoverFields(doc).fields;
+ const flow=createWorkflow(),fieldId=fields[0].id;
+ commitWorkflowData(flow,parseRecords('field:name\nOriginal'),fields,'source');
+ changeWorkflowValues(doc,fields,flow,[{index:0,fieldId,value:'First'},{index:0,fieldId,value:'Final'}]);
+ assert.equal(workflowRecord(doc,fields,flow,0).values[0],'Final');
+ assert.equal(travelWorkflow(flow,'undo'),true);
+ assert.equal(workflowRecord(doc,fields,flow,0).values[0],'Original');
+ assert.equal(travelWorkflow(flow,'redo'),true);
+ assert.equal(workflowRecord(doc,fields,flow,0).values[0],'Final');
+});

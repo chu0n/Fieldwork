@@ -41,8 +41,25 @@ test('custom definitions and their order survive saved configurations, with meta
 });
 test('prompt resolves roles and conflicting source values without fabricating or mixing turns',()=>{const prompt=buildPrompt(fields);assert.match(prompt,/người đăng ký hộ/);assert.match(prompt,/mâu thuẫn/);assert.match(prompt,/không lặp lại dữ liệu từ lượt trước/);assert.match(prompt,/không suy ra từ họ tên hay tự tạo tên tệp/);assert.match(prompt,/transform=none/);});
 
-import {readJSON,prepareJSONList} from '../src/json-input.js';
+import {readJSON,prepareJSONList,formatJSONPreview} from '../src/json-input.js';
 test('JSON syntax failures explain extra content and punctuation in Vietnamese',()=>{assert.throws(()=>readJSON('[{"x":"1"}]\n[{"x":"2"}]'),/JSON có nội dung thừa/);assert.throws(()=>readJSON('[{"x":}]'),/JSON chưa đúng cú pháp/);});
 test('explicit JSON repair combines complete blocks without changing values or dropping people',()=>{const one={id:'0001',text:'a } [ " 三'},two={id:'0002',text:'Hai'};const input=JSON.stringify(one)+'\n'+JSON.stringify([two]);const result=prepareJSONList(input);assert.equal(result.count,2);assert.deepEqual(readJSON(result.source),[one,two]);});
 
 test('JSON repair refuses prose, incomplete blocks, primitive values and preserves duplicate keys for rejection',()=>{for(const source of ['```json\n[]\n```','[{"x":"1"}] explanation','{"x":"1"','[1,2]','[]'])assert.throws(()=>prepareJSONList(source));const result=prepareJSONList('{"custom:id":"001","custom:id":"002","custom:bank":"ABC"}');assert.match(result.source,/"001","custom:id":"002"/);assert.throws(()=>parseLLMOutput(result.source,'json',fields),/key JSON bị lặp/);});
+
+test('JSON import accepts one object or an array with any whitespace',()=>{
+ const record={'custom:id':'0007','custom:bank':'ABC'};
+ for(const input of [record,[record]]){
+  for(const indent of [0,2])assert.deepEqual(parseLLMOutput(JSON.stringify(input,null,indent),'json',fields),{headers:data.headers,rows:[['0007','ABC']]});
+ }
+});
+test('formatted JSON preview changes only whitespace outside tokens',()=>{
+ const compact=String.raw`{"x":"a  b\u0020[{}],\\","n":90071992547409931111,"a":[-0,1e+2,{},[],{"b":true}]}`;
+ const preview=formatJSONPreview('\uFEFF'+compact);
+ assert.ok(preview.startsWith('\uFEFF{\n  "x": '));
+ assert.match(preview,/90071992547409931111/);
+ assert.match(preview,/-0,\n    1e\+2/);
+ assert.match(preview,/"a  b\\u0020/);
+ assert.deepEqual(JSON.parse(preview.slice(1)),JSON.parse(compact));
+ assert.throws(()=>formatJSONPreview('{"x":}'),/JSON/);
+});

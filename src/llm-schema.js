@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import {readJSON} from './json-input.js';
+import {readJSONRecords} from './json-input.js';
 import {resolveFields} from './data-fields.js';
 import {parseRecords} from './bulk-data.js';
 import {assertDataFields} from './data-limits.js';
@@ -63,10 +63,9 @@ export function parseLLMOutput(source,format,fields){
  const expected=resolveFields(fields).map(f=>f.key),trimmed=source.trim();
  if(trimmed.startsWith('```'))throw new Error('Kết quả có Markdown/code fence. Yêu cầu LLM trả dữ liệu thuần, hoặc chỉ dán phần dữ liệu bên trong.');
  if(format==='json'){
-   const records=readJSON(trimmed);
-   if(!Array.isArray(records)||!records.length)throw new Error('Cần JSON array có ít nhất một bản ghi.');
+   const records=readJSONRecords(trimmed);
    for(const [i,record]of records.entries()){
-     if(!record||Array.isArray(record)||typeof record!=='object'||Object.keys(record).length!==expected.length||expected.some(key=>!Object.hasOwn(record,key)))throw new Error(`Bản ghi ${i+1}: thiếu/thừa key so với bộ trường.`);
+     if(Object.keys(record).length!==expected.length||expected.some(key=>!Object.hasOwn(record,key)))throw new Error(`Bản ghi ${i+1}: thiếu/thừa key so với bộ trường.`);
      for(const key of expected)if(typeof record[key]!=='string')throw new Error(`Bản ghi ${i+1}: ${key} phải là chuỗi, kể cả số định danh.`);
    }
  }

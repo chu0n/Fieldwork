@@ -1,7 +1,7 @@
 import { t, getLanguage, setLanguage } from './locale.js';
 import {SessionAutosave,encodeSession,decodeSession} from './session-recovery.js';
 import {assertDataFields} from './data-limits.js';
-import {readJSON} from './json-input.js';
+import {readJSON,formatJSONPreview} from './json-input.js';
 import {fieldSelectionBinding,fieldSelectionPreview,unlinkFieldBindings,sourceSelectionRange} from './selection-fields.js';
 import {sharedFieldSelect} from './shared-field-ui.js';
 import {fillWorkspace,bindFillWorkspace,captureFillPosition} from './fill-workspace.js';
@@ -142,6 +142,17 @@ function bindEvents(){
  document.querySelectorAll('[data-close-document]').forEach(el=>el.onclick=()=>closeDocument(el.dataset.closeDocument));
  document.querySelectorAll('[data-rule-group]').forEach(el=>el.onclick=()=>{state.ruleGroup=el.dataset.ruleGroup;state.typeFilter='';state.restoreScroll=0;render();});
  document.querySelectorAll('[data-raw-version]').forEach(el=>el.onclick=()=>{state.rawVersion=el.dataset.rawVersion;render();});
+ const formatPreview=document.querySelector('#format-json-preview');
+ if(formatPreview){
+   const preview=document.querySelector('#raw-content'),source=preview.value;
+   formatPreview.onclick=()=>{
+     const formatted=formatPreview.getAttribute('aria-pressed')==='true';
+     try{
+       preview.value=formatted?source:formatJSONPreview(source);
+       formatPreview.setAttribute('aria-pressed',String(!formatted));
+     }catch(error){toast(error.message);}
+   };
+ }
  document.querySelector('#profile-filter')?.addEventListener('change',e=>{state.profileFilter=e.target.value;state.typeFilter='';state.selectedRuleIds=[];state.restoreScroll=0;render();});
  for(const [selector,key]of [['#type-filter','typeFilter'],['#status-filter','statusFilter'],['#sort-by','sortBy'],['#group-by','groupBy']])document.querySelector(selector)?.addEventListener('change',e=>{state[key]=e.target.value;state.restoreScroll=0;render();});
  document.querySelectorAll('[data-edit-unit]').forEach(el=>el.onclick=()=>{state.selected=el.dataset.editUnit;state.expanded=state.expanded===state.selected?null:state.selected;render();});
