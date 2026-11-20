@@ -12,7 +12,7 @@
       "fields-2.png",
       "fields-3.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "ai": {
     "width": 720,
@@ -26,7 +26,7 @@
       "ai-1.png",
       "ai-2.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "data": {
     "width": 720,
@@ -40,7 +40,7 @@
       "data-1.png",
       "data-2.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "mapping": {
     "width": 720,
@@ -54,7 +54,7 @@
       "mapping-1.png",
       "mapping-2.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "format": {
     "width": 720,
@@ -70,7 +70,7 @@
       "format-4.png",
       "format-3.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "json": {
     "width": 720,
@@ -85,7 +85,7 @@
       "json-2.png",
       "json-3.png"
     ],
-    "ui_hash": "8468b1371fe37e6d128a8f57cb7b31047ed67894f69fa9e66e4fe8c383360dae"
+    "ui_hash": "095d3e3c5bdd63298fa3825a79224a949beaaa604f25caaee2c89db86c7adda9"
   },
   "_ui_files": [
     "src/workbench.js",
